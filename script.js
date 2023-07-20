@@ -29,7 +29,7 @@ function generateSkillTree() {
             skillElement.style.cursor = skill.unlocked ? 'pointer' : 'default';
 
             skillElement.addEventListener('click', () => {
-                if (skill.unlocked) {
+                if (skill.unlocked && skillPoints > 0) {
                     // Handle skill selection (you can add relevant logic here)
                     console.log(`Selected Skill: ${skill.name}`);
                     skill.unlocked = false;
@@ -79,7 +79,7 @@ function addFillerSkills() {
             unlocked: false,
             prerequisite: i - 1,
             x: Math.floor(Math.random() * 800) - 400,
-            y: Math.floor(Math.random() * 300) - 200,
+            y: Math.floor(Math.random() * 800) - 400,
         });
     }
 }
@@ -96,11 +96,13 @@ function initSkillTree() {
 let isDragging = false;
 let startClientX;
 let startScrollLeft;
+let prevScrollLeft;
 
 function handleSkillTreeDragStart(e) {
     isDragging = true;
     startClientX = e.clientX;
     startScrollLeft = skillTreeContainer.scrollLeft;
+    prevScrollLeft = skillTreeContainer.scrollLeft;
     skillTreeContainer.style.cursor = 'grabbing';
 }
 
@@ -108,6 +110,10 @@ function handleSkillTreeDrag(e) {
     if (!isDragging) return;
     const dx = e.clientX - startClientX;
     skillTreeContainer.scrollLeft = startScrollLeft - dx;
+    if (prevScrollLeft !== skillTreeContainer.scrollLeft) {
+        startClientX = e.clientX;
+        prevScrollLeft = skillTreeContainer.scrollLeft;
+    }
 }
 
 function handleSkillTreeDragEnd() {
@@ -119,6 +125,17 @@ function handleSkillTreeDragEnd() {
 skillTreeSvg.addEventListener('mousedown', handleSkillTreeDragStart);
 window.addEventListener('mousemove', handleSkillTreeDrag);
 window.addEventListener('mouseup', handleSkillTreeDragEnd);
+
+// Gather Flowers and update the progress bar
+function gatherFlowers() {
+    if (skillPoints < 1) {
+        skillPoints++;
+        progressBar.value = skillPoints;
+    }
+}
+
+// Attach event listener to Gather Flowers button
+gatherButton.addEventListener('click', gatherFlowers);
 
 // Initial setup
 initSkillTree();
