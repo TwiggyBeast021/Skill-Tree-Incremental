@@ -1,59 +1,82 @@
-body {
-    background-color: #1a1a1a;
-    color: #fff;
-    font-family: Arial, sans-serif;
+// Sample skill tree data
+const skillTreeData = [
+    { id: 1, name: "Skill 1", description: "Description of Skill 1", unlocked: true, prerequisite: null },
+    { id: 2, name: "Skill 2", description: "Description of Skill 2", unlocked: false, prerequisite: 1 },
+    { id: 3, name: "Skill 3", description: "Description of Skill 3", unlocked: false, prerequisite: 1 },
+    { id: 4, name: "Skill 4", description: "Description of Skill 4", unlocked: false, prerequisite: 2 },
+    // Add more skills here...
+];
+
+const skillTreeContainer = document.getElementById('skillTree');
+const gatherButton = document.getElementById('gatherButton');
+const progressBar = document.getElementById('progressBar');
+
+// Generate Skill Tree
+function generateSkillTree() {
+    skillTreeContainer.innerHTML = '';
+    skillTreeData.forEach(skill => {
+        const skillElement = document.createElement('div');
+        skillElement.className = 'skill';
+        skillElement.innerText = skill.unlocked ? skill.name : 'Locked';
+        skillElement.title = skill.unlocked ? skill.description : 'Must progress further';
+
+        if (skill.unlocked) {
+            skillElement.style.backgroundColor = '#6b6b6b';
+            skillElement.style.cursor = 'default';
+        }
+
+        skillTreeContainer.appendChild(skillElement);
+
+        if (skill.prerequisite) {
+            const skillConnection = document.createElement('div');
+            skillConnection.className = 'skill-connection';
+            skillConnection.style.height = '50px';
+            skillConnection.style.left = getSkillPosition(skill.id).x + 'px';
+            skillConnection.style.top = getSkillPosition(skill.id).y - 50 + 'px';
+            skillTreeContainer.appendChild(skillConnection);
+        }
+    });
 }
 
-.container {
-    text-align: center;
-    margin-top: 30px;
+// Get Skill Position (Assume it's a circular arrangement)
+function getSkillPosition(skillId) {
+    const radius = 200;
+    const center = { x: skillTreeContainer.clientWidth / 2, y: skillTreeContainer.clientHeight / 2 };
+    const angle = (360 / skillTreeData.length) * (skillId - 1);
+    const radian = (angle * Math.PI) / 180;
+    const x = center.x + radius * Math.cos(radian);
+    const y = center.y + radius * Math.sin(radian);
+    return { x, y };
 }
 
-h1 {
-    font-size: 30px;
+// Update Skill Tree based on unlocked skills
+function updateSkillTree() {
+    skillTreeData.forEach(skill => {
+        const prevSkill = skill.prerequisite ? skillTreeData.find(s => s.id === skill.prerequisite) : null;
+        if (prevSkill) {
+            skill.unlocked = prevSkill.unlocked;
+        }
+    });
 }
 
-.skill-tree {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 30px;
+// Gather Flowers and update the progress bar
+let progressBarValue = 0;
+
+function gatherFlowers() {
+    progressBarValue++;
+    progressBar.value = progressBarValue;
+
+    if (progressBarValue === 15) {
+        progressBarValue = 0;
+        progressBar.value = 0;
+        // Add a skill point here and unlock relevant skills based on player progression
+        updateSkillTree();
+        generateSkillTree();
+    }
 }
 
-.skill {
-    width: 100px;
-    height: 100px;
-    background-color: #444;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
+// Attach event listeners
+gatherButton.addEventListener('click', gatherFlowers);
 
-.skill-connection {
-    position: absolute;
-    width: 2px;
-    background-color: #888;
-}
-
-.gather-flowers {
-    margin-top: 50px;
-}
-
-button {
-    background-color: #444;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-progress {
-    width: 200px;
-    height: 20px;
-    margin-top: 10px;
-}
+// Initial setup
+generateSkillTree();
