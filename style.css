@@ -1,7 +1,18 @@
+body {
+  background-color: #222;
+  color: #eee;
+  font-family: 'Arial', sans-serif;
+}
+
 .skill-tree {
   margin: 20px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #777;
+  background-color: #333;
+}
+
+h2, h3, h4 {
+  color: #eee;
 }
 
 .skills {
@@ -13,20 +24,36 @@
 .skill {
   width: 200px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #777;
+  background-color: #444;
+}
+
+.sub-skills {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.sub-skill {
+  padding: 5px;
+  border: 1px solid #777;
+  background-color: #555;
 }
 
 .unlock-btn {
   display: block;
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #777;
+  color: #eee;
   border: none;
   cursor: pointer;
 }
 
+.unlocked {
+  background-color: #222 !important;
+}
+
 .unlock-btn:disabled {
-  background-color: #ccc;
+  background-color: #999;
   cursor: not-allowed;
 }
