@@ -12,6 +12,8 @@ const skillTreeContainer = document.getElementById('skillTree');
 const gatherButton = document.getElementById('gatherButton');
 const progressBar = document.getElementById('progressBar');
 
+let skillPoints = 0;
+
 // Generate Skill Tree
 function generateSkillTree() {
     skillTreeContainer.innerHTML = '';
@@ -21,7 +23,6 @@ function generateSkillTree() {
             skillElement.className = 'skill';
             skillElement.innerText = skill.unlocked ? skill.name : 'Locked';
             skillElement.title = skill.unlocked ? skill.description : 'Must progress further';
-            skillElement.style.backgroundColor = skill.unlocked ? '#6b6b6b' : '#444';
             skillElement.style.left = skill.x + 'px';
             skillElement.style.top = skill.y + 'px';
 
@@ -65,14 +66,12 @@ function updateSkillTree() {
 }
 
 // Gather Flowers and update the progress bar
-let progressBarValue = 0;
-
 function gatherFlowers() {
-    progressBarValue++;
-    progressBar.value = progressBarValue;
+    skillPoints++;
+    progressBar.value = skillPoints;
 
-    if (progressBarValue === 15) {
-        progressBarValue = 0;
+    if (skillPoints === 15) {
+        skillPoints = 0;
         progressBar.value = 0;
         // Add a skill point here and unlock relevant skills based on player progression
         updateSkillTree();
