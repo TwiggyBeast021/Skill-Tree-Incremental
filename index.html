@@ -1,45 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assassin's Creed Skill Tree</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="skill-tree">
-    <h2>Skill Tree</h2>
-    <div class="skills">
-      <div class="skill unlocked" id="attack">
-        <h3>Attack</h3>
-        <button class="unlock-btn" disabled>Unlocked</button>
-        <div class="sub-skills">
-          <div class="sub-skill unlocked" id="sword">
-            <h4>Sword Mastery</h4>
-            <button class="unlock-btn" disabled>Unlocked</button>
-          </div>
-          <div class="sub-skill" id="dagger">
-            <h4>Dagger Mastery</h4>
-            <button class="unlock-btn">Unlock</button>
-          </div>
+    <div class="container">
+        <h1>Skill Tree</h1>
+        <div class="skill-tree" id="skillTree">
+            <!-- Skill Tree will be generated here -->
         </div>
-      </div>
-      <div class="skill" id="defense">
-        <h3>Defense</h3>
-        <button class="unlock-btn">Unlock</button>
-      </div>
-      <div class="skill" id="magic">
-        <h3>Magic</h3>
-        <button class="unlock-btn">Unlock</button>
-      </div>
-      <div class="skill" id="agility">
-        <h3>Agility</h3>
-        <button class="unlock-btn">Unlock</button>
-      </div>
-      <!-- Add more skills as needed -->
+        <div class="gather-flowers">
+            <button id="gatherButton">Gather Flowers</button>
+            <progress id="progressBar" max="15"></progress>
+        </div>
     </div>
-    <div class="skill-points">
-      <h4>Skill Points: <span id="skill-points">0</span></h4>
-    </div>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
