@@ -2,8 +2,8 @@
 const skillTree = {
   skills: {
     attack: {
-      unlocked: false,
-      cost: 1,
+      unlocked: true,
+      cost: 0,
       dependencies: []
     },
     defense: {
@@ -20,6 +20,16 @@ const skillTree = {
       unlocked: false,
       cost: 1,
       dependencies: []
+    },
+    sword: {
+      unlocked: true,
+      cost: 0,
+      dependencies: ['attack']
+    },
+    dagger: {
+      unlocked: false,
+      cost: 1,
+      dependencies: ['attack']
     },
     // Add more skills as needed
   },
