@@ -1,5 +1,3 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +17,20 @@
       <button class="skill" onclick="increaseSkill(this)">Endurance</button>
       <button class="skill" onclick="increaseSkill(this)">Perception</button>
       <button class="skill" onclick="increaseSkill(this)">Willpower</button>
+    </div>
+    <div class="combat">
+      <h2>Combat</h2>
+      <p>Your strength determines your damage output. Your agility determines your chance to dodge attacks. Your intelligence determines your critical hit chance. Your charisma determines your ability to persuade enemies. Your wisdom determines your resistance to debuffs. Your luck determines your chance to avoid damage. Your endurance determines your health pool. Your perception determines your accuracy. Your willpower determines your resistance to status effects.</p>
+      <p>To attack, click on the enemy you want to attack.</p>
+      <p>To defend, click on the "Defend" button.</p>
+      <p>The enemy's health is shown below their name. When their health reaches 0, they will be defeated.</p>
+      <div class="enemy">
+        <p>Enemy Name:</p>
+        <p>Health:</p>
+        <p>Attack:</p>
+        <p>Defense:</p>
+        <p>Status Effects:</p>
+      </div>
     </div>
   </div>
   <script src="script.js"></script>
