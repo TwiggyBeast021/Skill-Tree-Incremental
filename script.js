@@ -1,62 +1,50 @@
-var skills = [
-  {
-    name: "Strength",
-    cost: 100,
-    progress: 0
-  },
-  {
-    name: "Agility",
-    cost: 150,
-    progress: 0
-  },
-  {
-    name: "Intelligence",
-    cost: 200,
-    progress: 0
-  }
-];
-
-var selectedSkillIndex = 0;
-
-function updateSkillProgress() {
-  var skill = skills[selectedSkillIndex];
-  skill.progress += 1;
-
-  if (skill.progress >= skill.cost) {
-    skill.progress = 0;
-    selectedSkillIndex++;
-  }
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-window.onload = function() {
-  var container = document.querySelector(".container");
+.container {
+  width: 500px;
+  margin: 0 auto;
+}
 
-  for (var i = 0; i < skills.length; i++) {
-    var skill = skills[i];
+.skill-tree {
+  display: flex;
+  flex-direction: column;
+}
 
-    var skillElement = document.createElement("div");
-    skillElement.classList.add("skill");
+.skill {
+  margin-bottom: 10px;
+}
 
-    var skillNameElement = document.createElement("h2");
-    skillNameElement.textContent = skill.name;
+.skill-name {
+  font-size: 18px;
+  font-weight: bold;
+}
 
-    var skillCostElement = document.createElement("p");
-    skillCostElement.textContent = "Cost: " + skill.cost;
+.skill-cost {
+  font-size: 14px;
+}
 
-    var skillProgressElement = document.createElement("div");
-    skillProgressElement.classList.add("skill-progress");
+.skill-progress {
+  width: 100%;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 5px;
+}
 
-    var skillProgressBarElement = document.createElement("div");
-    skillProgressBarElement.classList.add("skill-progress-bar");
-    skillProgressBarElement.style.width = skill.progress + "%";
+.skill-progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #000;
+  border-radius: 5px;
+}
 
-    skillElement.appendChild(skillNameElement);
-    skillElement.appendChild(skillCostElement);
-    skillElement.appendChild(skillProgressElement);
-    skillProgressElement.appendChild(skillProgressBarElement);
+.skill-description {
+  font-size: 12px;
+}
 
-    container.appendChild(skillElement);
-  }
-
-  setInterval(updateSkillProgress, 1000);
-};
+.skill-max {
+  text-decoration: line-through;
+}
